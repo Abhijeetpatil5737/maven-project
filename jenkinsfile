@@ -1,45 +1,40 @@
-Pipeline{
-              any agent{
-                                  stages{
-                                            stage('scm checkout'){
-                                                           git 'https://github.com/Abhijeetpatil5737/maven-project.git'}
+pipeline {
+    agent any
 
 
-                                               stage('compile source code'){
-                                                            steps{
-                                                                           withMaven (maven: 'mymaven'){
-                                                                             sh 'mvn compile'
-                                                                       }
-                                                      }
-                                                 stage('scm test '){
-                                                  steps{
-                                                                     withMaven(maven: 'mymaven"){
-                                                                        sh 'mvn test'
-                                                             }
-                                               }
-                                                
-                                               stage('scm package'){
-                                             steps{
-                                                      withMaven(maven: 'mymaven'){
-                                                                   sh 'mvn package'
-                                                         }
-                                                 }
+    stages {
+        stage('SCM Checkout'){
+          git 'https://github.com/prakashk0301/maven-project'
+        }
+  }
+    {
+        stage ('Compile Stage') {
 
-                                                stage('scm install'){
-                                               steps{
-                                                 withMaven(maven: 'mymaven'){
-                                                                   sh 'mvn install'
-                                                         }
-                                                 }
-
-                                         stage('scm deploy{
-                                               steps
-                                               
-                                               {
-                                                 withMaven(maven: 'mymaven'){
-                                                                   sh 'mvn deploy'
-                                                         }
-                                                 }
-                                   }
-                              }
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn clean compile'
+                }
             }
+        }
+
+        stage ('Testing Stage') {
+
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn test'
+                }
+            }
+        }
+
+
+        stage ('install Stage') {
+            steps {
+                withMaven(maven : 'LocalMaven') {
+                    sh 'mvn install'
+                }
+            }
+        }
+
+         
+}
+}
