@@ -33,7 +33,9 @@ Pipeline{
                                                  }
 
                                          stage('scm deploy{
-                                               steps{
+                                               steps
+                                               
+                                               {
                                                  withMaven(maven: 'mymaven'){
                                                                    sh 'mvn deploy'
                                                          }
