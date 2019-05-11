@@ -13,28 +13,28 @@ Pipeline{
                                                       }
                                                  stage('scm test '){
                                                   steps{
-                                                                     withMaven(maven: 'mymaven){
+                                                                     withMaven(maven: 'mymaven"){
                                                                         sh 'mvn test'
                                                              }
                                                }
                                                 
                                                stage('scm package'){
                                              steps{
-                                                      withMaven(maven: 'mymaven){
+                                                      withMaven(maven: 'mymaven'){
                                                                    sh 'mvn package'
                                                          }
                                                  }
 
                                                 stage('scm install'){
                                                steps{
-                                                 withMaven(maven: 'mymaven){
+                                                 withMaven(maven: 'mymaven'){
                                                                    sh 'mvn install'
                                                          }
                                                  }
 
                                          stage('scm deploy{
                                                steps{
-                                                 withMaven(maven: 'mymaven){
+                                                 withMaven(maven: 'mymaven'){
                                                                    sh 'mvn deploy'
                                                          }
                                                  }
