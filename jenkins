@@ -1,0 +1,43 @@
+Pipeline{
+              any agent{
+                                  stages{
+                                            stage('scm checkout'){
+                                                           git 'github URL'}
+
+
+                                               stage('compile source code'){
+                                                            steps{
+                                                                           withMaven (maven: 'LocalMaven){
+                                                                             sh 'mvn compile'
+                                                                       }
+                                                      }
+                                                 stage('scm test '){
+                                                  steps{
+                                                                     withMaven(maven: 'localMaven){
+                                                                        sh 'mvn test'
+                                                             }
+                                               }
+                                                
+                                               stage('scm package'){
+                                             steps{
+                                                      withMaven(maven: 'localMaven){
+                                                                   sh 'mvn package'
+                                                         }
+                                                 }
+
+                                                stage('scm install'){
+                                               steps{
+                                                 withMaven(maven: 'localMaven){
+                                                                   sh 'mvn install'
+                                                         }
+                                                 }
+
+                                         stage('scm deploy{
+                                               steps{
+                                                 withMaven(maven: 'localMaven){
+                                                                   sh 'mvn deploy'
+                                                         }
+                                                 }
+                                   }
+                              }
+            }
