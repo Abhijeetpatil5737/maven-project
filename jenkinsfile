@@ -39,7 +39,7 @@ pipeline {
 			    
 		             withSonarQubeEnv('sonar') {
 				      withMaven(maven : 'mymaven') {
-				       sh ' mvn clean packege sonar:sonar '
+				       sh 'mvn clean packege sonar:sonar'
 				}
 			}
           }
