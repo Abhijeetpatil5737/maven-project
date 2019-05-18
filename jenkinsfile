@@ -34,7 +34,16 @@ pipeline {
                 }
             }
         }
-
+       stage ('sonar stage') {
+		    steps {
+			    
+		             withSonarQubeEnv(sonar : 'sonar') {
+				      withMaven(maven : 'mymaven') {
+				       sh ' mvn clean packege sonar:sonar '
+				}
+			}
+          }
+        }
          
 }
 }
